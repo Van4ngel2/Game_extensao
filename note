@@ -1,0 +1,26 @@
+Vamos dividir isso em partes para tornar mais claro:
+
+1. *Login e Cadastro*:
+   - O usuário inicia na tela de login.
+   - Se ele não tiver uma conta, ele pode ser redirecionado para a tela de cadastro.
+   - Após inserir seus dados de login ou cadastro, o PHP é usado para validar e processar esses dados.
+   - Se for um novo usuário, suas informações serão adicionadas à tabela de usuários no banco de dados.
+   - Se for um usuário existente, suas informações serão verificadas no banco de dados.
+
+2. *Tela Principal (Index)*:
+   - Após o login ou cadastro bem-sucedido, o usuário é redirecionado para a tela principal (index).
+   - Aqui é onde o jogo é exibido e o usuário pode começar a jogar.
+
+3. *Pontuação (Score)*:
+   - A pontuação do jogador pode ser guardada em uma tabela separada chamada "scores" no banco de dados.
+   - Cada registro na tabela de pontuações pode estar vinculado ao ID do usuário na tabela de usuários.
+   - Após o usuário completar o jogo, o JavaScript pode ser usado para enviar a pontuação do usuário para o servidor.
+   - O PHP no servidor então processa essa pontuação e a armazena na tabela de pontuações.
+
+4. *Comunicação da Tela Index para Score*:
+   - Após o usuário completar o jogo na tela index, o JavaScript pode ser usado para enviar a pontuação para o servidor.
+   - Isso pode ser feito usando AJAX para enviar uma solicitação POST para um script PHP no servidor que processa a pontuação.
+   - O script PHP recebe a pontuação do jogo como parte dos dados da solicitação POST, e então insere ou atualiza a pontuação do 
+   usuário na tabela de scores do banco de dados.
+   - Uma vez que a pontuação é armazenada no banco de dados, o servidor pode responder com uma confirmação ou uma mensagem de erro, 
+   dependendo do resultado da operação

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Game</title>
+    <link rel="stylesheet" href="ranking.css">
+</head>
+
+<body>
+    <div id="startScreen">
+        <div class="content">
+            <button type="button" id="sair" class="">
+                <a href="inicial.html">
+                    <img src="cancelar.png" alt="Sair">
+                </a>
+            </button>
+            <h1>Ranking</h1>
+            <div id="result_ranking">
+    </div>
+
+
+    <script>
+        // Função para fazer uma solicitação AJAX e buscar os dados do ranking
+        function fetchRankingData() {
+            // Cria um objeto XMLHttpRequest
+            var xhr = new XMLHttpRequest();
+
+            // Define a função de retorno de chamada quando a solicitação for concluída
+            xhr.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    // Quando a solicitação for bem-sucedida, exibe os dados do ranking
+                    document.getElementById("result_ranking").innerHTML = this.responseText;
+                }
+            };
+      
+            xhr.open("GET", "obter_ranking.php", true);
+
+            // Envie a solicitação
+            xhr.send();
+        }
+ 
+        // Chama a função para buscar os dados do ranking quando a página carrega
+        fetchRankingData();
+
+    </script>
+</body>
+
+</html>

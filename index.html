@@ -11,15 +11,325 @@
 <body>
 
   <div id="quiz">
+    <button type="button" id="sair">
+      <a href="inicial.html">
+        <img src="cancelar.png" alt="Sair">
+      </a>
+    </button>
     <h1>Quiz Game</h1>
     <div id="question"></div>
     <div id="options"></div>
     <div id="score">Score: 0</div>
-    <div id="time">tIME LEFT</div>
-    <a href="#" id="imageLink"><img src="IMG.PNG" alt="Imagem"></a>
+    <div id="time">Time Left</div>
+
+    <div id="errorModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>You have exceeded the maximum number of allowed errors.</p>
+        <button id="redirectButton">Go to login screen</button>
+      </div>
+    </div>
+
+    <a href="#" id="imageLink"><img src="IMG.PNG" alt="Image"></a>
+
+    <!-- Adicionando formulário para enviar o score -->
+    <form id="scoreForm" action="salvar_score.php" method="POST">
+      <!-- Campo oculto para armazenar o nome de usuário -->
+      <input type="hidden" id="usernameInput" name="username" value="<?php echo $username; ?>">
+      <!-- Campo oculto para armazenar o total de score -->
+      <input type="hidden" id="scoreInput" name="score">  
+    </form>
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    const questions = [
+  {
+    question: "O que significa 'HTML'?",
+    options: [
+      { id: "option1", text: "Linguagem de Marcação de Hipertexto" },
+      { id: "option2", text: "Links e Linguagem de Marcação de Texto" },
+      { id: "option3", text: "Linguagem de Ferramenta Doméstica" },
+      { id: "option4", text: "Hiper Ferramenta de Multi Linguagem" }
+    ],
+    answer: "option1"
+  },
+  {
+    question: "Qual é a função principal do CSS?",
+    options: [
+      { id: "option5", text: "Definir a estrutura de uma página da web" },
+      { id: "option6", text: "Criar elementos dinâmicos e interativos" },
+      { id: "option7", text: "Estilizar a aparência de uma página da web" },
+      { id: "option8", text: "Gerenciar operações do lado do servidor" }
+    ],
+    answer: "option7"
+  },
+  {
+    question: "O que significa 'HTTP'?",
+    options: [
+      { id: "option9", text: "Protocolo de Transferência de Hipertexto" },
+      { id: "option10", text: "Hipertexto Protocolo de Texto de Link" },
+      { id: "option11", text: "Protocolo de Transferência de Ferramenta Doméstica" },
+      { id: "option12", text: "Hiper Ferramenta de Multi Protocolo" }
+    ],
+    answer: "option9"
+  },
+  {
+    question: "Qual é o propósito do JavaScript?",
+    options: [
+      { id: "option13", text: "Definir a estrutura de uma página da web" },
+      { id: "option14", text: "Criar elementos dinâmicos e interativos" },
+      { id: "option15", text: "Estilizar a aparência de uma página da web" },
+      { id: "option16", text: "Gerenciar operações do lado do servidor" }
+    ],
+    answer: "option14"
+  },
+  {
+    question: "Qual é a diferença entre os operadores '==' e '===' em JavaScript?",
+    options: [
+      { id: "option17", text: "'==' compara tanto valor quanto tipo, '===' compara apenas valor" },
+      { id: "option18", text: "'==' compara apenas valor, '===' compara tanto valor quanto tipo" },
+      { id: "option19", text: "'==' é usado para atribuição, '===' é usado para comparação" },
+      { id: "option20", text: "Não há diferença entre eles" }
+    ],
+    answer: "option17"
+  },
+  {
+    question: "Qual é o propósito do SQL?",
+    options: [
+      { id: "option21", text: "Definir a estrutura de uma página da web" },
+      { id: "option22", text: "Criar elementos dinâmicos e interativos" },
+      { id: "option23", text: "Gerenciar operações de banco de dados" },
+      { id: "option24", text: "Estilizar a aparência de uma página da web" }
+    ],
+    answer: "option23"
+  },
+  {
+    question: "O que significa 'API'?",
+    options: [
+      { id: "option25", text: "Interface de Programação Automatizada" },
+      { id: "option26", text: "Interface de Programação Avançada" },
+      { id: "option27", text: "Interface de Programação de Aplicativos" },
+      { id: "option28", text: "Integração de Protocolo Automatizado" }
+    ],
+    answer: "option27"
+  },
+  {
+    question: "O que significa 'CSS'?",
+    options: [
+      { id: "option29", text: "Cascading Style Sheets" },
+      { id: "option30", text: "Código de Segurança de Software" },
+      { id: "option31", text: "Computação Simbólica e Simulação" },
+      { id: "option32", text: "Central de Serviços de Segurança" }
+    ],
+    answer: "option29"
+  },
+  {
+    question: "Qual é o objetivo do CSS?",
+    options: [
+      { id: "option33", text: "Criar elementos dinâmicos e interativos" },
+      { id: "option34", text: "Estilizar a aparência de uma página da web" },
+      { id: "option35", text: "Definir a estrutura de uma página da web" },
+      { id: "option36", text: "Gerenciar operações do lado do servidor" }
+
+      ],
+    answer: "option34"
+  },
+  {
+    question: "O que é uma 'tag' em HTML?",
+    options: [
+      { id: "option37", text: "Um elemento de estilo" },
+      { id: "option38", text: "Um tipo de arquivo" },
+      { id: "option39", text: "Uma unidade de medida" },
+      { id: "option40", text: "Um elemento de marcação" }
+    ],
+    answer: "option40"
+  },
+  {
+    question: "Qual é o objetivo do JavaScript?",
+    options: [
+      { id: "option41", text: "Estilizar a aparência de uma página da web" },
+      { id: "option42", text: "Criar elementos dinâmicos e interativos" },
+      { id: "option43", text: "Definir a estrutura de uma página da web" },
+      { id: "option44", text: "Gerenciar operações do lado do servidor" }
+    ],
+    answer: "option42"
+  },
+  {
+    question: "O que significa 'HTTP'?",
+    options: [
+      { id: "option45", text: "Protocolo de Transferência de Hipertexto" },
+      { id: "option46", text: "Hiper Termo Textual Padrão" },
+      { id: "option47", text: "Host para Transferência de Protocolo" },
+      { id: "option48", text: "Hipertexto de Transmissão de Dados" }
+    ],
+    answer: "option45"
+  },
+  {
+    question: "Qual é o propósito do SQL?",
+    options: [
+      { id: "option49", text: "Definir a estrutura de uma página da web" },
+      { id: "option50", text: "Criar elementos dinâmicos e interativos" },
+      { id: "option51", text: "Gerenciar operações de banco de dados" },
+      { id: "option52", text: "Estilizar a aparência de uma página da web" }
+    ],
+    answer: "option51"
+  },
+  {
+    question: "O que significa 'API'?",
+    options: [
+      { id: "option53", text: "Interface de Programação Automática" },
+      { id: "option54", text: "Interface de Programação de Aplicativos" },
+      { id: "option55", text: "Interpretação de Parâmetros e Instruções" },
+      { id: "option56", text: "Integração de Procedimentos e Instruções" }
+    ],
+    answer: "option54"
+  },
+  {
+    question: "Qual é a função do DNS?",
+    options: [
+      { id: "option57", text: "Gerenciar servidores de banco de dados" },
+      { id: "option58", text: "Gerenciar endereços IP" },
+      { id: "option59", text: "Gerenciar criptografia de dados" },
+      { id: "option60", text: "Gerenciar transações de rede" }
+    ],
+    answer: "option58"
+  },
+  {
+    question: "O que é um 'loop' em programação?",
+    options: [
+      { id: "option61", text: "Um erro de sintaxe" },
+      { id: "option62", text: "Uma sequência de instruções que se repete até que uma condição seja atendida" },
+      { id: "option63", text: "Um tipo de variável" },
+      { id: "option64", text: "Uma estrutura de dados" }
+    ],
+    answer: "option62"
+  },
+  {
+    question: "O que é um 'firewall'?",
+    options: [
+      { id: "option65", text: "Um dispositivo de rede que protege a rede de ataques externos" },
+      { id: "option66", text: "Um software de edição de texto" },
+      { id: "option67", text: "Um tipo de servidor web" },
+      { id: "option68", text: "Um dispositivo de armazenamento de dados" }
+    ],
+    answer: "option65"
+  }
+];
+    let currentQuestion = 0;
+    let score = 0;
+    let errors = 0;
+    let timer;
+    const askedQuestions = [];
+
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+
+    shuffleArray(questions); 
+
+    function displayQuestion() {
+      const questionElement = document.getElementById("question");
+      const optionsElement = document.getElementById("options");
+      const timeElement = document.getElementById("time");
+
+      if (askedQuestions.length === questions.length) {
+   
+        alert(`Quiz finished! Your final score is ${score}`);
+       
+        document.getElementById('scoreInput').value = score;
+       
+        document.getElementById('scoreForm').submit();
+        return; 
+      }
+
+     
+      let randomIndex;
+      do {
+        randomIndex = Math.floor(Math.random() * questions.length);
+      } while (askedQuestions.includes(randomIndex));
+
+     
+      askedQuestions.push(randomIndex);
+
+
+      const question = questions[randomIndex];
+      questionElement.textContent = question.question;
+      optionsElement.innerHTML = "";
+
+
+      question.options.forEach(option => {
+        const button = document.createElement("button");
+        button.textContent = option.text;
+        button.onclick = () => checkAnswer(option.id, question.answer);
+        optionsElement.appendChild(button);
+      });
+
+      // Start the 15-second timer
+      let timeLeft = 15;
+      timeElement.textContent = timeLeft;
+
+      timer = setInterval(() => {
+        timeLeft--;
+        timeElement.textContent = timeLeft;
+        if (timeLeft === 0) {
+          clearInterval(timer);
+          nextQuestion();
+        }
+      }, 1000); 
+    }
+
+
+    function checkAnswer(selectedOption, correctAnswer) {
+      clearInterval(timer); 
+
+      const timeLeft = 15 - parseInt(document.getElementById("time").textContent);
+      let points = 0;
+
+      if (selectedOption === correctAnswer) {
+      
+        if (timeLeft <= 10 && timeLeft > 0) {
+          points = 1500; 
+        } else {
+          points = 750; 
+        }
+
+        score += points;
+        document.getElementById("score").textContent = `Score: ${score}`;
+      }
+
+      // Disable all option buttons after clicking
+      const optionButtons = document.querySelectorAll("#options button");
+      optionButtons.forEach(button => {
+        button.disabled = true;
+      });
+
+      setTimeout(() => {
+        nextQuestion();
+      }, 1000); 
+    }
+
+  
+    function showErrorModal() {
+      document.getElementById('errorModal').style.display = 'block';
+    }
+
+    // Redirect to the login screen when button is clicked
+    document.getElementById('redirectButton').onclick = function() {
+      window.location.href = "login.html";
+    }
+
+    function nextQuestion() {
+      currentQuestion++;
+      displayQuestion(); // Display the next question
+    }
+
+    // Start the game by displaying the first question
+    displayQuestion();
+
+  </script>
 
 </body>
 

@@ -1,0 +1,120 @@
+/* Adicione essas regras CSS ao seu arquivo ranking2.css */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('https://i.redd.it/jbut5yiy0b461.gif');
+    background-size: cover;
+    background-position: center;
+    animation: animacaoFundo 5s infinite;
+}
+
+.startScreen {
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    max-width: 600px;
+    width: 60%;
+    margin: auto; /* Centraliza horizontalmente */
+    margin-top: 50px; /* Adiciona espaço no topo */
+    height: 600px; /* Ajusta a altura do contêiner */
+    display: flex; /* Adiciona display flex */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+}
+
+@keyframes animacaoFundo {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.content {
+    text-align: center;
+}
+
+h1 {
+    color: #000;
+    font-size: 36px;
+    margin-bottom: 20px;
+    font-family: 'Fredoka One', cursive;
+}
+
+button {
+  background-color: #ff69b4;
+  color: #000;
+  border: 2px solid #000;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: 'Fredoka One', cursive;
+  
+}
+button a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button:hover {
+    background-color: #ff8ac7;
+    border-color: #ff8ac7;
+  
+}
+
+#salvar a {
+    text-decoration: #000;
+    color: #000;
+    font-family: 'Fredoka One', cursive;
+}
+
+#salvar:hover {
+    background-color: #ff8ac7;
+    border-color: #ff8ac7;
+}
+
+input[type="text"],
+input[type="password"] {
+    padding: 10px;
+    border: 2px solid #ff69b4;
+    border-radius: 8px;
+    font-size: 18px;
+    color: white;
+    background-color: transparent;
+    transition: border-color 0.3s ease, color 0.3s ease;
+    outline: none;
+    font-family: 'Fredoka One', cursive;
+    margin-bottom: 30px;
+}
+
+input[type="text"]::placeholder,
+input[type="password"]::placeholder {
+    color: #000;
+    font-family: 'Fredoka One', cursive;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: #ff8ac7;
+}
+#login{
+    margin-top: 30px;
+    
+   
+}

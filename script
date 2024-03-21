@@ -88,19 +88,49 @@ const questions = [
 
 let currentQuestion = 0;
 let score = 0;
+let errors = 0;
 let timer;
+const askedQuestions = []; // Array para manter o registro das perguntas já exibidas
+
+
+
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+shuffleArray(questions); // Embaralhe as perguntas no início do jogo
 
 function displayQuestion() {
   const questionElement = document.getElementById("question");
   const optionsElement = document.getElementById("options");
   const timeElement = document.getElementById("time");
 
-  // Verifica se ainda há perguntas restantes
-  if (currentQuestion >= questions.length) {
-    // Se não houver mais perguntas, exibe a pontuação final e encerra o jogo
+  // Verifica se todas as perguntas foram feitas
+  if (askedQuestions.length === questions.length) {
+    // Se sim, exibe a pontuação final e encerra o jogo
     alert(`Quiz finished! Your final score is ${score}`);
+    window.location.href = "login.html"; // Redireciona para a tela de login
     return;
   }
+
+  // Escolhe uma pergunta aleatória que ainda não foi feita
+  let randomIndex;
+  do {
+    randomIndex = Math.floor(Math.random() * questions.length);
+  } while (askedQuestions.includes(randomIndex));
+
+  // Adiciona o índice da pergunta ao registro de perguntas feitas
+  askedQuestions.push(randomIndex);
+
+  // Atualiza a pergunta atual para a pergunta escolhida
+  const question = questions[randomIndex];
+  questionElement.textContent = question.question;
+  optionsElement.innerHTML = "";
+
+
 
   questionElement.textContent = questions[currentQuestion].question;
   optionsElement.innerHTML = "";
@@ -157,6 +187,51 @@ function checkAnswer(selectedOption, button) {
     nextQuestion();
   }, 1000); // 1 segundo
 }
+
+function checkAnswer(selectedOption, button) {
+  clearInterval(timer); // Limpa o temporizador quando uma resposta é selecionada
+
+  const timeLeft = 15 - parseInt(document.getElementById("time").textContent);
+  let points = 0;
+
+  if (selectedOption === questions[currentQuestion].answer) {
+    // Calcula a pontuação com base no tempo restante
+    if (timeLeft <= 10 && timeLeft > 0) {
+      points = 1500; // Se o tempo restante for <= 10 segundos, ganha 1500 pontos
+    } else {
+      points = 750; // Caso contrário, ganha 750 pontos
+    }
+
+    score += points;
+    document.getElementById("score").textContent = `Score: ${score}`;
+    button.classList.add("correct"); // Adiciona classe ao botão se a resposta estiver correta
+  } else {
+    errors++; // Incrementa o contador de erros
+    // Exibe uma mensagem para o jogador saber que cometeu um erro
+    alert("Resposta incorreta. Tente novamente!");
+    button.classList.add("incorrect"); // Adiciona classe ao botão se a resposta estiver incorreta
+  }
+  // Desabilita o botão de opção após clicar
+  button.disabled = true;
+
+  setTimeout(() => {
+    button.classList.remove("correct", "incorrect"); // Remove classe após 1 segundo
+    button.disabled = false; // Habilita o botão de opção novamente
+    nextQuestion();
+  }, 1000); // 1 segundo
+}
+
+
+// Exibe o modal de erro
+function showErrorModal() {
+  document.getElementById('errorModal').style.display = 'block';
+}
+
+// Redireciona para a tela de login ao clicar no botão
+document.getElementById('redirectButton').onclick = function() {
+  window.location.href = "login.html";
+}
+
 
 function nextQuestion() {
   currentQuestion++;
