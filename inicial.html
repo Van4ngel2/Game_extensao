@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Game</title>
+  <link rel="stylesheet" href="inicial.css">
+</head>
+<body>
+  <div id="startScreen">
+    <div class="content">
+      <h1>Jornada Binária - Quiz Game</h1>
+      <button id="startBtn">Start</button>
+      <button id="ranking">Ranking</button>
+      <button id="sair">Sair</button>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("startBtn").onclick = function () {
+      window.location.href = "index.html";
+    };
+    document.getElementById("ranking").onclick = function () {
+      window.location.href = "ranking.html";
+    };
+  
+    document.getElementById("sair").onclick = function () {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "logout.php", true);
+        xhr.send();
+        
+        // Redirecionar para a tela de login após o logout
+        window.location.href = "login.html";
+    };
+</script>
+
+     
+
+  </script>
+</body>
+</html>
