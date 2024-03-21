@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url('https://i.redd.it/jbut5yiy0b461.gif');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+#quiz {
+  background-color: rgba(255, 255, 255, 0.4);
+  /* Fundo com opacidade */
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  text-align: center;
+  max-width: 600px;
+  width: 80%;
+}
+
+h1 {
+  color: #6c5ce7;
+  /* Roxo escuro */
+  margin-bottom: 20px;
+  font-family: 'Fredoka One', cursive;
+}
+
+#question {
+  font-size: 18px;
+  margin-bottom: 20px;
+  font-family: 'Fredoka One', cursive;
+}
+
+#options button {
+  background-color: #8A2BE2;
+  /* Azul escuro */
+  color: #fff;
+  border: none;
+  padding: 15px 30px;
+  margin: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 300px;
+}
+
+#options button:hover {
+  background-color: #0056b3;
+}
+
+#options button.correct {
+  background-color: #28a745;
+}
+
+#options button.incorrect {
+  background-color: #dc3545;
+}
+
+#score {
+  font-size: 24px;
+  margin-top: 20px;
+  color:  #000080;
+  font-family: 'Fredoka One', cursive;
+  /* Aplica a fonte Fredoka One */
+  animation: pulse 0.5s infinite alternate;
+  /* Adiciona a animação de pulso */
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+#time {
+  font-size: 40px;
+  margin-bottom: 20px;
+  color: #000;
+  /* Roxo escuro */
+  font-family: 'Fredoka One', cursive;
+  /* Aplica a fonte Fredoka One */
+}
+
+button#nextBtn {
+  background-color: #6c5ce7;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button#nextBtn:hover {
+  background-color: #5a4bd6;
+}
+
+#imageLink {
+  display: inline-block;
+  margin-left: 5px;
+}
+
+#imageLink img {
+  width: 50px;
+  /* Ajuste o tamanho conforme necessário */
+  height: auto;
+  /* Mantém a proporção da imagem */
+}
+
+#sair {
+  background-color: transparent;
+  /* Remover fundo */
+  border: none;
+  /* Remover borda */
+  cursor: pointer;
+  /* Mudar cursor ao passar por cima */
+  padding-left: 560px;
+  margin-top: 1px;
+}
+
+#quiz img {
+  width: 50px;
+  /* Definir largura da imagem */
+  height: 50px;
+  /* Definir altura da imagem */
+}
+
+#quiz img:hover {
+  opacity: 0.7;
+  /* Reduzir opacidade ao passar por cima */
+}
+
+/* Estilos para o modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+/* Conteúdo do modal */
+.modal-content {
+  background-color: #f8eaf9; /* Rosa claro */
+  margin: 10% auto;
+  padding: 30px;
+  border-radius: 10px;
+  max-width: 400px;
+  box-shadow: 0 0 20px rgba(200, 100, 200, 0.3); /* Sombra suave roxa */
+  background-color: #b52587;
+}
+
+/* Estilos para o botão de fechar */
+.close {
+  color: #ff69b4; /* Roxo escuro */
+  font-size: 24px;
+  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+#redirectButton:hover {
+  color: white;
+  background-color: rgb(231, 134, 150);
+}
+
