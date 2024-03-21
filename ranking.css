@@ -1,0 +1,65 @@
+/* Adicione essas regras CSS ao seu arquivo ranking2.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: url('https://i.redd.it/jbut5yiy0b461.gif');
+    background-size: cover;
+    background-position: center;
+    animation: animacaoFundo 5s infinite;
+
+}
+
+#startScreen {
+    background-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 10px rgba(255, 20, 147, 15);
+    padding: 20px;
+    text-align: center;
+    max-width: 500px; /* Ajuste conforme necessário */
+    width: 70%;
+    height: 90%;
+    margin: auto; /* Centraliza na tela */
+    animation: animacaoFundo 10s infinite;
+}
+
+h1 {
+    color: #000;
+    font-size: 48px; /* Ajuste conforme necessário */
+    margin-bottom: fixed;
+    font-family: 'Fredoka One', cursive;
+}
+
+#sair {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-top: 10 px;
+    padding-left: 430px;
+}
+
+#sair img {
+    width: 50px;
+    height: 50px;
+}
+
+#sair img:hover {
+    opacity: 0.7;
+}
+
+/* Estilos para o contêiner da tabela */
+.table-container {
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    height: fixed; /* Define a altura do contêiner como a altura da tela */
+   
+    font-family: 'Fredoka One', cursive;
+    font-size: 20px;
+}
