@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="cadastro2.css">
+  <title>Cadastro</title>
+</head>
+<body>
+  <div class="startScreen">
+    <div class="content">
+      <h1 class="text-center">Faça seu cadastro:</h1>
+      <form id="cadastroForm" action="salvar_score.php" method="POST">
+        <label for="username"></label>
+        <input type="text" id="username" name="username" class="form-control" placeholder="Insira seu UserName"><br>
+        <label for="senha" class="form-label"></label>
+        <input type="password" id="senha" name="senha" class="form-control" placeholder="Insira sua Senha">
+        <div class="text-center form-group">
+          <button type="submit" id="salvar" class="">Cadastrar</button><br>
+          <button id = "login" class="button"> <a href="login.html">Voltar pro login</a></button>
+       
+        </div>
+      </form>
+    </div>
+  </div>
+  <script>
+    document.getElementById("cadastroForm").addEventListener("submit", function(event) {
+      // Obtém os valores do formulário
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("senha").value;
+      
+      // Verifica se algum dos campos está vazio
+      if (username === "" || password === "") {
+        // Se algum campo estiver vazio, não envie o formulário
+        alert("Por favor, preencha todos os campos.");
+        event.preventDefault(); // Impede o envio padrão do formulário
+      }
+    });
+  </script>
+</body>
+</html>
